@@ -1,0 +1,82 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Database Query",
+    "description": "Query your database in English.",
+    "version": "v0.0.1"
+  },
+  "servers": [{ "url": "https://f8ab506a9962.ngrok.app" }],
+  "paths": {
+    "/api/query": {
+      "post": {
+        "description": "Executes a MySQL query to retrieve data.",
+        "operationId": "mysql_query",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/mysql_queryRequestSchema"
+              }
+            }
+          },
+          "required": true
+        },
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "description": "The query result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "mysql_queryRequestSchema": {
+        "properties": {
+          "host": {
+            "type": "string",
+            "title": "host",
+            "description": "Database host"
+          },
+          "user": {
+            "type": "string",
+            "title": "user",
+            "description": "Database user"
+          },
+          "password": {
+            "type": "string",
+            "title": "password",
+            "description": "Database password"
+          },
+          "database": {
+            "type": "string",
+            "title": "database",
+            "description": "Database name"
+          },
+          "query": {
+            "type": "string",
+            "title": "query",
+            "description": "A MySQL query that will be executed"
+          }
+        },
+        "type": "object",
+        "required": ["host", "user", "password", "database", "query"],
+        "title": "mysql_queryRequestSchema"
+      }
+    }
+  }
+}
